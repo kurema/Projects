@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="UWPApp1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPApp1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <NavigationView IsSettingsVisible="True">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Icon="Play" Content="Item1" />
+            <NavigationViewItem Icon="Download" Content="Item1" />
+        </NavigationView.MenuItems>
+        <Frame >
+            <FlipView FlowDirection="LeftToRight" HorizontalAlignment="Stretch">
+                <WebView Source="https://www.google.co.jp"/>
+                <WebView Source="https://www.yahoo.co.jp"/>
+            </FlipView>
+        </Frame>
+    </NavigationView>
+</Page>
