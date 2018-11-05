@@ -14,7 +14,7 @@
             <NavigationViewItem Icon="Download" Content="Item1" />
         </NavigationView.MenuItems>
         <Frame >
-            <FlipView FlowDirection="LeftToRight" HorizontalAlignment="Stretch">
+            <FlipView FlowDirection="RightToLeft" HorizontalAlignment="Stretch">
                 <WebView Source="https://www.google.co.jp"/>
                 <WebView Source="https://www.yahoo.co.jp"/>
             </FlipView>
