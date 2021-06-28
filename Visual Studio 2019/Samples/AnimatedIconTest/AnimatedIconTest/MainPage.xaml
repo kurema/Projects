@@ -1,0 +1,114 @@
+﻿<Page
+    x:Class="AnimatedIconTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AnimatedIconTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+    
+    Loaded="Page_Loaded"
+    >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <controls:NavigationView Grid.Row="1" IsBackEnabled="True" IsPaneOpen="True" PaneDisplayMode="Left">
+            <!--<controls:NavigationView.AutoSuggestBox>
+                <AutoSuggestBox QueryIcon="Find" />
+            </controls:NavigationView.AutoSuggestBox>-->
+        </controls:NavigationView>
+        <StackPanel Orientation="Horizontal" Height="40">
+            <!--<StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="40"/>
+                </Style>
+            </StackPanel.Resources>-->
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedAcceptVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedBackVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedChevronDownSmallVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedChevronRightDownSmallVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedChevronUpDownSmallVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedFindVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedGlobalNavigationButtonVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+            <Button PointerEntered="Button_PointerEntered" PointerExited="Button_PointerExited">
+                <controls:AnimatedIcon>
+                    <controls:AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedSettingsVisualSource />
+                    </controls:AnimatedIcon.Source>
+                    <controls:AnimatedIcon.FallbackIconSource>
+                        <controls:SymbolIconSource Symbol="Add" />
+                    </controls:AnimatedIcon.FallbackIconSource>
+                </controls:AnimatedIcon>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
