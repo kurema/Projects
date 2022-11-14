@@ -30,16 +30,45 @@ namespace WebViewTestApp
             this.InitializeComponent();
         }
 
-        private async void WebView_WebResourceRequested(WebView sender, WebViewWebResourceRequestedEventArgs args)
+        private void WebView_WebResourceRequested1(WebView sender, WebViewWebResourceRequestedEventArgs args)
+        {
+            var source = sender.Source; // Exception!
+        }
+
+        private async void WebView_WebResourceRequested2(WebView sender, WebViewWebResourceRequestedEventArgs args)
         {
             var deferral = args.GetDeferral();
-            Uri uri = null;
+            Uri source;
+            await sender.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                source = sender.Source;
+            });
+            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.BadGateway);
+        }
+
+        private async void WebView_WebResourceRequested3(WebView sender, WebViewWebResourceRequestedEventArgs args)
+        {
+            var deferral = args.GetDeferral();
+            Uri source;
+            await Task.Run(async () =>
+            {
+                await sender.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                {
+                    source = sender.Source;
+                }
+                );
+            }).ConfigureAwait(true);
+            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.BadGateway);
+        }
+
+        private async void WebView_WebResourceRequested4(WebView sender, WebViewWebResourceRequestedEventArgs args)
+        {
+            var deferral = args.GetDeferral();
             var sb = new StringBuilder();
             sb.AppendLine($"1: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             await sender.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 sb.AppendLine($"2: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
-                uri = sender.Source;
             });
             sb.AppendLine($"3: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             Debug.WriteLine(sb.ToString());
@@ -48,9 +77,9 @@ namespace WebViewTestApp
             deferral.Dispose();
         }
 
-        private async void WebView_WebResourceRequested2(WebView sender, WebViewWebResourceRequestedEventArgs args)
+        private async void WebView_WebResourceRequested5(WebView sender, WebViewWebResourceRequestedEventArgs args)
         {
-            Uri uri = null;
+            var deferral = args.GetDeferral();
             var sb = new StringBuilder();
             sb.AppendLine($"1: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             await Task.Run(async () =>
@@ -59,12 +88,14 @@ namespace WebViewTestApp
                 await sender.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
                     sb.AppendLine($"3: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
-                    uri = sender.Source;
                 });
+                sb.AppendLine($"4: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             }).ConfigureAwait(true);
-            sb.AppendLine($"4: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+            sb.AppendLine($"5: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             Debug.WriteLine(sb.ToString());
             args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.Forbidden);
+            deferral.Complete();
+            deferral.Dispose();
         }
 
     }

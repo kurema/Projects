@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <WebView WebResourceRequested="WebView_WebResourceRequested"  Source="https://www.google.com/"/>
+        <WebView WebResourceRequested="WebView_WebResourceRequested3"  Source="https://www.google.com/"/>
     </Grid>
 </Page>
