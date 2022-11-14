@@ -43,7 +43,9 @@ namespace WebViewTestApp
             {
                 source = sender.Source;
             });
-            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.BadGateway);
+            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.BadGateway);//Exception!
+            deferral.Complete();
+            deferral.Dispose();
         }
 
         private async void WebView_WebResourceRequested3(WebView sender, WebViewWebResourceRequestedEventArgs args)
@@ -58,7 +60,9 @@ namespace WebViewTestApp
                 }
                 );
             }).ConfigureAwait(true);
-            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.BadGateway);
+            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.BadGateway);//Exception!
+            deferral.Complete();
+            deferral.Dispose();
         }
 
         private async void WebView_WebResourceRequested4(WebView sender, WebViewWebResourceRequestedEventArgs args)
@@ -72,7 +76,10 @@ namespace WebViewTestApp
             });
             sb.AppendLine($"3: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             Debug.WriteLine(sb.ToString());
-            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.Forbidden);
+            //1: 7
+            //2: 3
+            //3: 4
+            args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.Forbidden);//Exception!
             deferral.Complete();
             deferral.Dispose();
         }
@@ -93,6 +100,11 @@ namespace WebViewTestApp
             }).ConfigureAwait(true);
             sb.AppendLine($"5: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
             Debug.WriteLine(sb.ToString());
+            //1: 7
+            //2: 5
+            //3: 3
+            //4: 5
+            //5: 5
             args.Response = new Windows.Web.Http.HttpResponseMessage(Windows.Web.Http.HttpStatusCode.Forbidden);
             deferral.Complete();
             deferral.Dispose();
