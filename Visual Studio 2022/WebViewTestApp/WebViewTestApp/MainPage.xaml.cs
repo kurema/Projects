@@ -90,17 +90,17 @@ namespace WebViewTestApp
         {
             var deferral = args.GetDeferral();
             var sb = new StringBuilder();
-            sb.AppendLine($"1: {Thread.CurrentThread.ManagedThreadId}");
+            sb.AppendLine($"1: {Thread.CurrentThread.ManagedThreadId} {SynchronizationContext.Current is null}");
             await Task.Run(async () =>
             {
-                sb.AppendLine($"2: {Thread.CurrentThread.ManagedThreadId}");
+                sb.AppendLine($"2: {Thread.CurrentThread.ManagedThreadId} {SynchronizationContext.Current is null}");
                 await sender.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    sb.AppendLine($"3: {Thread.CurrentThread.ManagedThreadId}");
+                    sb.AppendLine($"3: {Thread.CurrentThread.ManagedThreadId} {SynchronizationContext.Current is null}");
                 });
-                sb.AppendLine($"4: {Thread.CurrentThread.ManagedThreadId}");
+                sb.AppendLine($"4: {Thread.CurrentThread.ManagedThreadId} {SynchronizationContext.Current is null}");
             }).ConfigureAwait(true);
-            sb.AppendLine($"5: {Thread.CurrentThread.ManagedThreadId}");
+            sb.AppendLine($"5: {Thread.CurrentThread.ManagedThreadId} {SynchronizationContext.Current is null}");
             Debug.WriteLine(sb.ToString());
             //1: 7
             //2: 5
