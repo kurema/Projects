@@ -1,0 +1,39 @@
+﻿@page "/"
+
+@foreach (var item in Items)
+{
+	<div>
+		<span>@item.Title</span>
+		<button @onclick="_=>{Items.Remove(item);}">×</button>
+	</div>
+}
+<div>
+	<button @onclick="_=>Items.Add(new Entry(Guid.NewGuid().ToString()))">+</button>
+</div>
+
+@foreach (var item in Items)
+{
+	@item.Body
+}
+
+@code {
+
+	public List<Entry> Items { get; } = new()
+	{
+		new("A"),
+		new("B"),
+		new("C"),
+	};
+
+	public class Entry
+	{
+		public Entry(string title)
+		{
+			Title = title;
+		}
+
+        public RenderFragment Body =>@<div>@Title</div>;
+
+		public string Title { get; set; }
+	}
+}
